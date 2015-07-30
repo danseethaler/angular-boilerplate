@@ -21,4 +21,13 @@ app.controller('mainCtrl', function ($scope, quoteGetter) {
 		quoteGetter.addData(newData)
 	};
 
+    $scope.setupFilter = function(){
+
+        if ($scope.myFilter === undefined) {
+            $scope.myFilter = $scope.newQuote;
+        }else{
+            $scope.myFilter = undefined;
+        }
+    }
+
 });

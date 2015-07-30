@@ -22,10 +22,10 @@
         <div class="buttons">
             <input type="button" name="submit" ng-click="addData()" value="Submit">
             <input type="button" name="remove" ng-click="removeData(newQuote)" value="Remove Quote">
-
+            <input type="button" name="filter" ng-click="setupFilter()" value="Filter">
         </div>
 
-        <div ng-repeat="quote in quotes">
+        <div ng-repeat="quote in quotes | filter: myFilter">
 
             <blockquote>
                 {{quote.text}}
