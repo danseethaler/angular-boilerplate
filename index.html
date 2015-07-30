@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Angular Boilerplate</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
 <link rel="stylesheet" href="style.css" title="no title" charset="utf-8">
 
 <body ng-app="quoteBook">
@@ -12,32 +13,37 @@
     <div class="">
 
 
-    <div class="content" ng-controller='mainCtrl' ng-cloak>
+        <div class="container col-lg-8 col-lg-offset-2" ng-controller='mainCtrl' ng-cloak>
 
-        <div class="text">
-            <textarea type="textbox" name="newQuote" ng-model="newQuote" placeholder="New Quote Text"></textarea>
-            <input type="text" name="newAuthor" ng-model="newAuthor" placeholder="Author">
+            <div class="page-header">
+                <h1>This is a cool Quote Book App</h1>
+                <p>Click the buttons and see what happens</p>
+            </div>
 
+            <form class="text">
+                <textarea class="form-control" type="text" name="newQuote" ng-model="newQuote" placeholder="New Quote Text"></textarea>
+                <input class="form-control" type="text" name="newAuthor" ng-model="newAuthor" placeholder="Author">
+
+            </form>
+            <div class="buttons">
+                <input class="btn" type="button" name="submit" ng-click="addData()" value="Submit">
+                <input class="btn" type="button" name="remove" ng-click="removeData(newQuote)" value="Remove Quote">
+                <input class="btn" type="button" name="filter" ng-click="setupFilter()" value="Filter">
+            </div>
+
+            <div ng-repeat="quote in quotes | filter: myFilter" class="quote">
+
+                <blockquote>
+                    {{quote.text}}
+                </blockquote>
+                <cite>
+                    {{quote.author}}
+                </cite>
+
+            </div>
         </div>
-        <div class="buttons">
-            <input type="button" name="submit" ng-click="addData()" value="Submit">
-            <input type="button" name="remove" ng-click="removeData(newQuote)" value="Remove Quote">
-            <input type="button" name="filter" ng-click="setupFilter()" value="Filter">
-        </div>
 
-        <div ng-repeat="quote in quotes | filter: myFilter">
-
-            <blockquote>
-                {{quote.text}}
-            </blockquote>
-            <cite>
-                {{quote.author}}
-            </cite>
-
-        </div>
     </div>
-
-</div>
 
 
 
