@@ -55,6 +55,9 @@ app.service('quoteGetter', function () {
                 return;
             }
         }
+
+		return true;
+
     }
 
 })

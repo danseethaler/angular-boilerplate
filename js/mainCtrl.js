@@ -1,6 +1,6 @@
 var app = angular.module('quoteBook');
 
-app.controller('mainCtrl', function ($scope, quoteGetter) {
+app.controller('mainCtrl', ['$scope', 'quoteGetter', '$timeout', function ($scope, quoteGetter, $timeout) {
 
 	$scope.myName = 'Dan the man';
 
@@ -8,26 +8,46 @@ app.controller('mainCtrl', function ($scope, quoteGetter) {
 
 	$scope.removeData = function (text) {
 
-		quoteGetter.removeData(text)
+		$scope.missingQuote = quoteGetter.removeData(text);
+
+		$timeout(function () {
+			$scope.missingQuote = false;
+		}, 2500)
+
 	};
 
 	$scope.addData = function () {
 
-        var newData = {
-            text: $scope.newQuote,
-            author: $scope.newAuthor
-        }
+		if ($scope.newQuote === undefined) {
+			$scope.addDataReturn = 'missingText';
+			$timeout(function () {
+				delete $scope.addDataReturn;
+			}, 2000);
+			return;
+		}
+		if ($scope.newAuthor === undefined) {
+			$scope.addDataReturn = 'missingAuthor';
+			$timeout(function () {
+				delete $scope.addDataReturn;
+			}, 2000);
+			return;
+		}
+
+		var newData = {
+			text: $scope.newQuote,
+			author: $scope.newAuthor
+		}
 
 		quoteGetter.addData(newData)
 	};
 
-    $scope.setupFilter = function(){
+	$scope.setupFilter = function () {
 
-        if ($scope.myFilter === undefined) {
-            $scope.myFilter = $scope.newQuote;
-        }else{
-            $scope.myFilter = undefined;
-        }
-    }
+		if ($scope.myFilter === undefined) {
+			$scope.myFilter = $scope.newQuote;
+		} else {
+			$scope.myFilter = undefined;
+		}
+	}
 
-});
+}]);

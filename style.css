@@ -19,3 +19,7 @@ textarea {
 .buttons {
     text-align: center;
 }
+
+.addMargin {
+    margin: 15px 0px;
+}

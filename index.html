@@ -26,9 +26,15 @@
 
             </form>
             <div class="buttons">
-                <input class="btn" type="button" name="submit" ng-click="addData()" value="Submit">
-                <input class="btn" type="button" name="remove" ng-click="removeData(newQuote)" value="Remove Quote">
-                <input class="btn" type="button" name="filter" ng-click="setupFilter()" value="Filter">
+                <input class="btn" type="button" ng-click="addData()" value="Submit">
+                <input class="btn" type="button" ng-click="removeData(newQuote)" value="Remove Quote">
+                <input class="btn" type="button" ng-click="setupFilter()" value="Filter">
+
+
+                <div class="alert alert-danger addMargin" ng-if="addDataReturn === 'missingText'" role="alert"><strong>Please add some text to your quote.</strong></div>
+                <div class="alert alert-danger addMargin" ng-if="addDataReturn === 'missingAuthor'" role="alert"><strong>Please add an author to your quote.</strong></div>
+                <div class="alert alert-danger addMargin" ng-show="missingQuote" role="alert"><strong>No quote matches your text string.</strong></div>
+                <div class="alert alert-info addMargin" ng-show="myFilter" role="alert"><strong>Click filter again to turn off the filter.</strong></div>
             </div>
 
             <div ng-repeat="quote in quotes | filter: myFilter" class="quote">
